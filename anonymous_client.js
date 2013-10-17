@@ -1,6 +1,7 @@
-Meteor.loginAnonymously = function(fn) {
-  Meteor.call('login', {anonymous: true}, function(err, result) {
-    Accounts._makeClientLoggedIn(result.id, result.token);
-    fn && fn();
-  });
+Meteor.loginAnonymously = function(callback) {
+  var options = {
+    methodArguments: [{anonymous: true}],
+    userCallback: callback
+  };
+  Accounts.callLoginMethod(options);
 }
